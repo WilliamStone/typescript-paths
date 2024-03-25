@@ -35,6 +35,10 @@ export function tsConfigPaths({
 				return null
 			}
 
+			// 如果importee是绝对路径，则直接返回null
+			if (path.isAbsolute(importee)) {
+  				return null;
+			}
 			const moduleName = handler?.(request, importer)
 			if (!moduleName) {
 				return this.resolve(request, importer, { skipSelf: true, ...options })
